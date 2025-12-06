@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>QA Portfolio – Lukas Bergmann</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-alt: #0b1020;
+      --accent: #00e5ff;
+      --accent-soft: #76d7c4;
+      --text: #f5f7fb;
+      --text-muted: #a9b3c9;
+      --card-bg: #0f172a;
+      --border: #1f2937;
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.45);
+      --radius-lg: 18px;
+      --radius-pill: 999px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #111827 0, #020617 55%, #000 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .page {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 28px 18px 40px;
+    }
+
+    header {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding: 20px 22px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(2, 6, 23, 0.95));
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      margin-bottom: 26px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.22), transparent 60%),
+        radial-gradient(circle at 120% 0%, rgba(129, 230, 217, 0.18), transparent 60%);
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    header > div {
+      position: relative;
+      z-index: 1;
+    }
+
+    .tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.85);
+      color: var(--text-muted);
+    }
+
+    .tag-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(0, 229, 255, 0.9);
+    }
+
+    h1 {
+      font-size: clamp(1.9rem, 3vw, 2.3rem);
+      letter-spacing: 0.03em;
+    }
+
+    h1 span {
+      color: var(--accent);
+    }
+
+    .subtitle {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      max-width: 620px;
+    }
+
+    .header-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .chip {
+      font-size: 0.78rem;
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .chip-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    section {
+      background: rgba(15, 23, 42, 0.96);
+      border-radius: var(--radius-lg);
+      padding: 18px 18px 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.35);
+    }
+
+    section h2 {
+      font-size: 1.05rem;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: #e5e7eb;
+    }
+
+    section h2 span.icon {
+      font-size: 1.15rem;
+    }
+
+    .section-body {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    .skills-card {
+      background: linear-gradient(135deg, #020617, #020b1b);
+      border-radius: 14px;
+      padding: 10px 12px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    .skills-card h3 {
+      font-size: 0.86rem;
+      margin-bottom: 4px;
+      color: #e5e7eb;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .skills-card ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .skills-card li::before {
+      content: "•";
+      margin-right: 6px;
+      color: var(--accent-soft);
+    }
+
+    .project {
+      border-radius: 14px;
+      padding: 10px 12px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), transparent 55%),
+        #020617;
+      margin-bottom: 10px;
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+
+    .project-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .project-tag {
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: var(--text-muted);
+    }
+
+    .project-desc {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .bug-list {
+      list-style: none;
+      padding-left: 0;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+    }
+
+    .bug-list li {
+      margin-bottom: 3px;
+      position: relative;
+      padding-left: 16px;
+    }
+
+    .bug-list li::before {
+      content: "⚠";
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-size: 0.78rem;
+    }
+
+    .two-cols {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 12px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+      font-size: 0.8rem;
+    }
+
+    .badge {
+      padding: 3px 9px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: var(--text-muted);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .contact-row {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      margin-top: 18px;
+      font-size: 0.75rem;
+      color: #6b7280;
+      text-align: center;
+    }
+
+    @media (max-width: 720px) {
+      header {
+        padding: 16px 16px;
+      }
+      .two-cols {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="tagline">
+        <span class="tag-dot"></span>
+        <span>Junior Software Tester · Fokus auf Logik & Klarheit</span>
+      </div>
+      <div>
+        <h1>Lukas Bergmann – <span>QA Portfolio</span></h1>
+      </div>
+      <p class="subtitle">
+        Gamer-Mindset, Wettbewerbsdenken und saubere Fehleranalyse: Ich teste Web-Anwendungen strukturiert,
+        finde Inkonsistenzen und dokumentiere sie so, dass Entwickler direkt damit arbeiten können.
+        Mein Ziel: stabile, verständliche Software – ohne unnötigen Stress.
+      </p>
+      <div class="header-meta">
+        <div class="chip">
+          <span class="chip-dot"></span>
+          Manuelles Testen (Web / UI)
+        </div>
+        <div class="chip">
+          <span class="chip-dot"></span>
+          Bug-Reports & Testfälle
+        </div>
+        <div class="chip">
+          <span class="chip-dot"></span>
+          Remote-freundlich
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Skills -->
+      <section>
+        <h2><span class="icon">🧰</span> Skills & Stärken</h2>
+        <div class="section-body">
+          <div class="skills-grid">
+            <div class="skills-card">
+              <h3>Fachlich</h3>
+              <ul>
+                <li>Manuelles Testen von Web-Anwendungen</li>
+                <li>Erstellen und Ausführen von Testfällen</li>
+                <li>Schreiben verständlicher Bug-Reports</li>
+                <li>Erkennen von UI-, UX- und Logikfehlern</li>
+                <li>Basisverständnis von Status, Routing & Validierung</li>
+              </ul>
+            </div>
+            <div class="skills-card">
+              <h3>Arbeitsweise</h3>
+              <ul>
+                <li>Strukturiertes, logisches Denken</li>
+                <li>Hohe Fehler-Sensibilität & Detailfokus</li>
+                <li>Ruhig, konzentriert, ausdauernd</li>
+                <li>Teamfähig, aber kein Fan von viel Kundenkontakt 😉</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projekte -->
+      <section>
+        <h2><span class="icon">🧪</span> Test-Projekte</h2>
+        <div class="section-body">
+          <div class="project">
+            <div class="project-header">
+              <div class="project-title">Mini-Projekt 1 – To-Do App</div>
+              <div class="project-tag">Web · Manuelles Testen</div>
+            </div>
+            <p class="project-desc">
+              Einfache To-Do-Webanwendung mit Funktionen zum Hinzufügen, Markieren und Löschen von Aufgaben.
+              Fokus auf UI-Logik, Eingabevalidierung und Nutzerführung.
+            </p>
+            <ul class="bug-list">
+              <li>Eingabefeld bleibt nach dem Hinzufügen einer Aufgabe gefüllt (UX-Problem).</li>
+              <li>Leere Aufgaben können erstellt werden, da Validierung fehlt.</li>
+              <li>Erledigt-Status (Checkbox) zeigt keine visuelle Änderung.</li>
+              <li>UI-Reste (Checkbox & Papierkorb) bleiben nach Löschen ohne Text im Layout stehen.</li>
+            </ul>
+          </div>
+
+          <div class="project">
+            <div class="project-header">
+              <div class="project-title">Mini-Projekt 2 – Konto & Bestellungen</div>
+              <div class="project-tag">Web · Logik & Konsistenz</div>
+            </div>
+            <p class="project-desc">
+              Kleine Web-App mit Dashboard, Profilseite und Bestellübersicht. Fokus auf Navigation,
+              Datenkonsistenz und Status-Logik.
+            </p>
+            <ul class="bug-list">
+              <li>Navigation „Profil“ ändert nur die URL, aber nicht den Seiteninhalt.</li>
+              <li>Profiländerungen werden nach Klick auf „Speichern“ nicht persistiert.</li>
+              <li>Sortieren nach Status hat keine sichtbare Auswirkung auf die Liste.</li>
+              <li>Widersprüchliche Statusanzeige: Liste zeigt „Offen“, Detailansicht „Versendet“.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bug-Reports & Ziele -->
+      <section>
+        <h2><span class="icon">📄</span> Bug-Reports & nächste Schritte</h2>
+        <div class="section-body two-cols">
+          <div>
+            <p style="margin-bottom:6px;">
+              Aus meinen Übungen habe ich strukturierte Bug-Reports erstellt, z. B.:
+            </p>
+            <ul class="bug-list">
+              <li>
+                <strong>„Falsches Verhalten Eingabefeld“ – To-Do App:</strong>
+                Eingabefeld wird nach dem Hinzufügen einer Aufgabe nicht geleert
+                → erschwert schnelles Arbeiten.
+              </li>
+              <li>
+                <strong>„Leere Aufgabe kann erstellt werden“ – To-Do App:</strong>
+                fehlende Validierung erlaubt leere Einträge → schlechte Datenqualität.
+              </li>
+            </ul>
+          </div>
+          <div>
+            <p><strong>Nächste Schritte:</strong></p>
+            <div class="badge-row">
+              <span class="badge">ISTQB CTFL anstreben</span>
+              <span class="badge">Einstieg als Junior QA Tester</span>
+              <span class="badge">Schrittweise Automatisierung lernen</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Kontakt -->
+      <section>
+        <h2><span class="icon">📬</span> Kontakt</h2>
+        <div class="section-body contact-row">
+          <span><strong>Name:</strong> Lukas Bergmann</span>
+          <span><strong>E-Mail:</strong> <a href="mailto:Lukasbergmann5@gmail.com">Lukasbergmann5@gmail.com</a></span>
+          <!-- Optional:
+          <span><strong>Ort:</strong> flexibel · Remote-freundlich (Österreich / EU)</span>
+          -->
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      &copy; 2025 · QA Portfolio von Lukas Bergmann
+    </footer>
+  </div>
+</body>
+</html>
